@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { Language } from 'genese-tests/lib/genese-core/enums/language';
 import { GetAllResponse } from 'genese-tests/lib/genese-core/models/gn-request-params';
 import { Genese } from 'genese-tests/lib/core/factories/genese.factory';
-import { GeneseService } from 'genese-tests/lib/core/services/genese.service';
+// import { GeneseService } from 'genese-tests/lib/core/services/genese.service';
 import { add, GeneseTests } from 'genese-tests';
 
 
@@ -47,14 +47,14 @@ export class HomeComponent implements AfterViewInit, OnInit {
     constructor(
         private bookDataService: BookDataService,
         private dialog: MatDialog,
-        private geneseService: GeneseService,
+        // private geneseService: GeneseService,
         private http: HttpClient,
         public methodService: MethodService
     ) {
-        this.booleansGenese = geneseService.getGeneseInstance(Boolean);
-        this.booksGenese = geneseService.getGeneseInstance(Books);
-        this.categoriesGenese = geneseService.getGeneseInstance(String);
-        this.codesGenese = geneseService.getGeneseInstance(Number);
+        // this.booleansGenese = geneseService.getGeneseInstance(Boolean);
+        // this.booksGenese = geneseService.getGeneseInstance(Books);
+        // this.categoriesGenese = geneseService.getGeneseInstance(String);
+        // this.codesGenese = geneseService.getGeneseInstance(Number);
     }
 
 

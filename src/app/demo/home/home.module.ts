@@ -5,6 +5,7 @@ import { CoreModule } from '../core/core.module';
 import { DescriptionComponent } from './description/description.component';
 import { MethodService } from './services/method.service';
 import { GeneseModule } from 'genese-tests/lib/core/genese.module';
+import { GeneseAngularLibraryModule } from 'genese-angular-library';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { GeneseModule } from 'genese-tests/lib/core/genese.module';
     ],
     imports: [
         CoreModule,
-        GeneseModule,
+        GeneseAngularLibraryModule,
 
         AppRoutingModule
     ],
