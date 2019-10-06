@@ -4,6 +4,7 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { CoreModule } from '../core/core.module';
 import { DescriptionComponent } from './description/description.component';
 import { MethodService } from './services/method.service';
+import { GeneseModule } from 'genese-tests/lib/core/genese.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { MethodService } from './services/method.service';
     ],
     imports: [
         CoreModule,
+        GeneseModule,
 
         AppRoutingModule
     ],

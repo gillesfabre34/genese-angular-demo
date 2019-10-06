@@ -6,10 +6,12 @@ import { Books, LightBookEditor } from './models/books.model';
 import { ResponseStatus } from '../enums/response-status';
 import { Method } from './models/method.model';
 import { MethodService } from './services/method.service';
-import { add, GeneseTests, Genese } from 'genese-tests';
 import { HttpClient } from '@angular/common/http';
 import { Language } from 'genese-tests/lib/genese-core/enums/language';
 import { GetAllResponse } from 'genese-tests/lib/genese-core/models/gn-request-params';
+import { Genese } from 'genese-tests/lib/core/factories/genese.factory';
+import { GeneseService } from 'genese-tests/lib/core/services/genese.service';
+import { add, GeneseTests } from 'genese-tests';
 
 
 @Component({
@@ -45,13 +47,14 @@ export class HomeComponent implements AfterViewInit, OnInit {
     constructor(
         private bookDataService: BookDataService,
         private dialog: MatDialog,
+        private geneseService: GeneseService,
         private http: HttpClient,
         public methodService: MethodService
     ) {
-        this.booleansGenese = new Genese<Boolean>(http, Boolean);
-        this.booksGenese = new Genese<Books>(http, Books);
-        this.categoriesGenese = new Genese<String>(http, String);
-        this.codesGenese = new Genese<Number>(http, Number);
+        this.booleansGenese = geneseService.getGeneseInstance(Boolean);
+        this.booksGenese = geneseService.getGeneseInstance(Books);
+        this.categoriesGenese = geneseService.getGeneseInstance(String);
+        this.codesGenese = geneseService.getGeneseInstance(Number);
     }
 
 
