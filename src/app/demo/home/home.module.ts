@@ -4,20 +4,23 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { CoreModule } from '../core/core.module';
 import { DescriptionComponent } from './description/description.component';
 import { MethodService } from './services/method.service';
-import { GeneseModule } from 'genese-tests/lib/core/genese.module';
 import { GeneseAngularLibraryModule } from 'genese-angular-library';
+import { GeneseService } from 'genese-angular-library/lib/services/genese.service';
 
 
 @NgModule({
     declarations: [
         DescriptionComponent,
-        HomeComponent,
+        HomeComponent
     ],
     imports: [
         CoreModule,
-        GeneseAngularLibraryModule,
+        GeneseAngularLibraryModule.forRoot(),
 
         AppRoutingModule
+    ],
+    entryComponents: [
+        HomeComponent,
     ],
     providers: [
         MethodService

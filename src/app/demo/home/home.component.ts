@@ -7,17 +7,24 @@ import { ResponseStatus } from '../enums/response-status';
 import { Method } from './models/method.model';
 import { MethodService } from './services/method.service';
 import { HttpClient } from '@angular/common/http';
-import { Language } from 'genese-tests/lib/genese-core/enums/language';
-import { GetAllResponse } from 'genese-tests/lib/genese-core/models/gn-request-params';
-import { Genese } from 'genese-tests/lib/core/factories/genese.factory';
+// import { Language } from 'genese-tests/lib/genese-core/enums/language';
+// import { GetAllResponse } from 'genese-tests/lib/genese-core/models/gn-request-params';
+// import { Genese } from 'genese-tests/lib/core/factories/genese.factory';
 // import { GeneseService } from 'genese-tests/lib/core/services/genese.service';
 import { add, GeneseTests } from 'genese-tests';
+import { Genese } from 'genese-angular-library/lib/factories/genese.factory';
+import { Language } from 'genese-angular-library/lib/enums/language';
+import { GetAllResponse } from 'genese-angular-library/lib/models/gn-request-params';
+import { GeneseService } from 'genese-angular-library/lib/services/genese.service';
+import { TestService, ToolsService } from 'genese-angular-library';
+// import { GeneseService } from 'genese-angular-library/lib/services/genese.service';
 
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    styleUrls: ['./home.component.scss'],
+    // providers: [ToolsService]
 })
 
 export class HomeComponent implements AfterViewInit, OnInit {
@@ -49,8 +56,12 @@ export class HomeComponent implements AfterViewInit, OnInit {
         private dialog: MatDialog,
         // private geneseService: GeneseService,
         private http: HttpClient,
-        public methodService: MethodService
+        public methodService: MethodService,
+        private testService: TestService,
+        private toolsService: ToolsService
     ) {
+        const zzz = ToolsService.toSnakeCase('fdsdfRfds');
+        console.log('zzz', zzz);
         // this.booleansGenese = geneseService.getGeneseInstance(Boolean);
         // this.booksGenese = geneseService.getGeneseInstance(Books);
         // this.categoriesGenese = geneseService.getGeneseInstance(String);
