@@ -5,11 +5,10 @@ import { Books, LightBookEditor } from './models/books.model';
 import { ResponseStatus } from '../enums/response-status';
 import { Method } from './models/method.model';
 import { MethodService } from './services/method.service';
-import { HttpClient } from '@angular/common/http';
 import { Genese } from 'genese-angular-library/lib/factories/genese.factory';
 import { Language } from 'genese-angular-library/lib/enums/language';
 import { GetAllResponse } from 'genese-angular-library/lib/models/gn-request-params';
-import { GeneseService, TestService, ToolsService } from 'genese-angular-library';
+import { GeneseService } from 'genese-angular-library';
 
 
 @Component({
@@ -45,13 +44,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
     constructor(
         private dialog: MatDialog,
         private geneseService: GeneseService,
-        private http: HttpClient,
         public methodService: MethodService,
-        private testService: TestService,
-        private toolsService: ToolsService
     ) {
-        const zzz = ToolsService.toSnakeCase('fdsdfRfds');
-        console.log('zzz', zzz);
         this.booleansGenese = geneseService.getGeneseInstance(Boolean);
         this.booksGenese = geneseService.getGeneseInstance(Books);
         this.categoriesGenese = geneseService.getGeneseInstance(String);
