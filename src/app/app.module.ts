@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './demo/home/home.module';
-import { HttpGenese } from 'genese-tests';
-import { GeneseAngularLibraryModule } from 'genese-angular-library';
 
 @NgModule({
     declarations: [
@@ -21,7 +19,7 @@ import { GeneseAngularLibraryModule } from 'genese-angular-library';
     exports: [
         HttpClientModule
     ],
-    providers: [HttpGenese],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

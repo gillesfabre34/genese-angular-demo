@@ -1,30 +1,21 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 import { tap } from 'rxjs/operators';
-import { BookDataService } from './services/book-data.service';
 import { Books, LightBookEditor } from './models/books.model';
 import { ResponseStatus } from '../enums/response-status';
 import { Method } from './models/method.model';
 import { MethodService } from './services/method.service';
 import { HttpClient } from '@angular/common/http';
-// import { Language } from 'genese-tests/lib/genese-core/enums/language';
-// import { GetAllResponse } from 'genese-tests/lib/genese-core/models/gn-request-params';
-// import { Genese } from 'genese-tests/lib/core/factories/genese.factory';
-// import { GeneseService } from 'genese-tests/lib/core/services/genese.service';
-import { add, GeneseTests } from 'genese-tests';
 import { Genese } from 'genese-angular-library/lib/factories/genese.factory';
 import { Language } from 'genese-angular-library/lib/enums/language';
 import { GetAllResponse } from 'genese-angular-library/lib/models/gn-request-params';
-import { GeneseService } from 'genese-angular-library/lib/services/genese.service';
-import { TestService, ToolsService } from 'genese-angular-library';
-// import { GeneseService } from 'genese-angular-library/lib/services/genese.service';
+import { GeneseService, TestService, ToolsService } from 'genese-angular-library';
 
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    // providers: [ToolsService]
+    styleUrls: ['./home.component.scss']
 })
 
 export class HomeComponent implements AfterViewInit, OnInit {
@@ -52,9 +43,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
     // --------------------------------------------------
 
     constructor(
-        private bookDataService: BookDataService,
         private dialog: MatDialog,
-        // private geneseService: GeneseService,
+        private geneseService: GeneseService,
         private http: HttpClient,
         public methodService: MethodService,
         private testService: TestService,
@@ -62,10 +52,10 @@ export class HomeComponent implements AfterViewInit, OnInit {
     ) {
         const zzz = ToolsService.toSnakeCase('fdsdfRfds');
         console.log('zzz', zzz);
-        // this.booleansGenese = geneseService.getGeneseInstance(Boolean);
-        // this.booksGenese = geneseService.getGeneseInstance(Books);
-        // this.categoriesGenese = geneseService.getGeneseInstance(String);
-        // this.codesGenese = geneseService.getGeneseInstance(Number);
+        this.booleansGenese = geneseService.getGeneseInstance(Boolean);
+        this.booksGenese = geneseService.getGeneseInstance(Books);
+        this.categoriesGenese = geneseService.getGeneseInstance(String);
+        this.codesGenese = geneseService.getGeneseInstance(Number);
     }
 
 
@@ -77,9 +67,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
      * Component initialization
      */
     ngOnInit(): void {
-        console.log('%c ngOninit genese npm add ', 'font-weight: bold; color: orange', add(5, 10));
-        const multiply = GeneseTests.multiply(2, 3);
-        console.log('%c ngOninit genese npm multiply ', 'font-weight: bold; color: orange', multiply);
         this.paginator.pageIndex = this.pageIndex;
         this.paginator.pageSize = this.pageSize;
     }
