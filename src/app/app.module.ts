@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './demo/home/home.module';
-import { HttpGenese } from 'genese-tests';
 
 @NgModule({
     declarations: [
@@ -20,7 +19,7 @@ import { HttpGenese } from 'genese-tests';
     exports: [
         HttpClientModule
     ],
-    providers: [HttpGenese],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
