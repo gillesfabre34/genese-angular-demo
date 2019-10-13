@@ -4,7 +4,6 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { CoreModule } from '../core/core.module';
 import { DescriptionComponent } from './description/description.component';
 import { MethodService } from './services/method.service';
-import { GeneseAngularLibraryModule } from 'genese-angular-library';
 
 
 @NgModule({
@@ -14,7 +13,6 @@ import { GeneseAngularLibraryModule } from 'genese-angular-library';
     ],
     imports: [
         CoreModule,
-        GeneseAngularLibraryModule.forRoot(),
 
         AppRoutingModule
     ],

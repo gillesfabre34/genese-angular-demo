@@ -2,7 +2,6 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
 
 
-
 export class PaginatorComponent extends MatPaginatorIntl {
     translate: TranslateService;
     itemsPerPageLabel = '';

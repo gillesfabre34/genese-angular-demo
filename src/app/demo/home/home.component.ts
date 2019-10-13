@@ -5,10 +5,7 @@ import { Books, LightBookEditor } from './models/books.model';
 import { ResponseStatus } from '../enums/response-status';
 import { Method } from './models/method.model';
 import { MethodService } from './services/method.service';
-import { Genese } from 'genese-angular-library/lib/factories/genese.factory';
-import { Language } from 'genese-angular-library/lib/enums/language';
-import { GetAllResponse } from 'genese-angular-library/lib/models/gn-request-params';
-import { GeneseService } from 'genese-angular-library';
+import { Genese, GeneseService, GetAllResponse, Language } from 'genese-angular';
 
 
 @Component({

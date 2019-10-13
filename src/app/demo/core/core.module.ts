@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-
 @NgModule({
     declarations: [
     ],

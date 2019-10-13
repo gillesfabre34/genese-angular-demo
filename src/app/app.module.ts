@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './demo/home/home.module';
+import { GeneseModule } from 'genese-angular';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import { HomeModule } from './demo/home/home.module';
     ],
     imports: [
         BrowserModule,
+        GeneseModule.forRoot(),
         HomeModule,
 
         AppRoutingModule
