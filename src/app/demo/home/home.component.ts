@@ -162,9 +162,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
             });
     }
 
-
-
-
     /**
      * Get all the books with pagination
      */
