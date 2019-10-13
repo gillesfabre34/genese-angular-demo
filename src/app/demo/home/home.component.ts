@@ -1,15 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 import { tap } from 'rxjs/operators';
-import { BookDataService } from './services/book-data.service';
 import { Books, LightBookEditor } from './models/books.model';
 import { ResponseStatus } from '../enums/response-status';
 import { Method } from './models/method.model';
 import { MethodService } from './services/method.service';
-import { add, GeneseTests, Genese } from 'genese-tests';
-import { HttpClient } from '@angular/common/http';
-import { Language } from 'genese-tests/lib/genese-core/enums/language';
-import { GetAllResponse } from 'genese-tests/lib/genese-core/models/gn-request-params';
+import { Genese, GeneseService, GetAllResponse, Language } from 'genese-angular';
 
 
 @Component({
@@ -43,15 +39,14 @@ export class HomeComponent implements AfterViewInit, OnInit {
     // --------------------------------------------------
 
     constructor(
-        private bookDataService: BookDataService,
         private dialog: MatDialog,
-        private http: HttpClient,
-        public methodService: MethodService
+        private geneseService: GeneseService,
+        public methodService: MethodService,
     ) {
-        this.booleansGenese = new Genese<Boolean>(http, Boolean);
-        this.booksGenese = new Genese<Books>(http, Books);
-        this.categoriesGenese = new Genese<String>(http, String);
-        this.codesGenese = new Genese<Number>(http, Number);
+        this.booleansGenese = geneseService.getGeneseInstance(Boolean);
+        this.booksGenese = geneseService.getGeneseInstance(Books);
+        this.categoriesGenese = geneseService.getGeneseInstance(String);
+        this.codesGenese = geneseService.getGeneseInstance(Number);
     }
 
 
@@ -63,9 +58,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
      * Component initialization
      */
     ngOnInit(): void {
-        console.log('%c ngOninit genese npm add ', 'font-weight: bold; color: orange', add(5, 10));
-        const multiply = GeneseTests.multiply(2, 3);
-        console.log('%c ngOninit genese npm multiply ', 'font-weight: bold; color: orange', multiply);
         this.paginator.pageIndex = this.pageIndex;
         this.paginator.pageSize = this.pageSize;
     }
@@ -166,9 +158,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
                 console.log('%c getAllPrimitives codes ', 'font-weight: bold; color: brown;', data);
             });
     }
-
-
-
 
     /**
      * Get all the books with pagination

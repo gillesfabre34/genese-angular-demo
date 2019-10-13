@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
+import { GeneseEnvironmentService } from 'genese-angular';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'genese-core';
+  title = 'genese-demo';
+
+
+  constructor(geneseEnvironmentService: GeneseEnvironmentService) {
+      geneseEnvironmentService.setEnvironment(environment.genese);
+  }
 }

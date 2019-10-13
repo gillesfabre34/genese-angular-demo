@@ -1,7 +1,5 @@
-
 import { NgModule } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { TranslateModule as NgxTranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule as NgxTranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';

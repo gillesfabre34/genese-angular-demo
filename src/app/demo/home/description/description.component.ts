@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Method } from '../models/method.model';
 import { MethodService } from '../services/method.service';
 
 

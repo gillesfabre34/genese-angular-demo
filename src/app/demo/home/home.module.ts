@@ -9,12 +9,15 @@ import { MethodService } from './services/method.service';
 @NgModule({
     declarations: [
         DescriptionComponent,
-        HomeComponent,
+        HomeComponent
     ],
     imports: [
         CoreModule,
 
         AppRoutingModule
+    ],
+    entryComponents: [
+        HomeComponent,
     ],
     providers: [
         MethodService
