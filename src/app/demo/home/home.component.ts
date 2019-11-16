@@ -5,7 +5,7 @@ import { Books, LightBookEditor } from './models/books.model';
 import { ResponseStatus } from '../enums/response-status';
 import { Method } from './models/method.model';
 import { MethodService } from './services/method.service';
-import { Genese, GeneseService, GetAllResponse, Language, RequestMethod } from 'genese-angular';
+import { Genese, GeneseService, GetAllResponse, RequestMethod } from 'genese-angular';
 import { BOOK } from './mocks/book.mock';
 
 
@@ -30,7 +30,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
     public method: Method = {};
     public pageIndex = 0;
     public pageSize = 5;
-    public path = '/books';
+    public rootPath = '/books';
 
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -83,7 +83,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
      */
     getOne(id: string): void {
         // this.method = this.methodService.getMethod('getOne');
-        this.booksGenese.getOne(this.path, '1').subscribe((book: Books) => {
+        this.booksGenese.getOne(this.rootPath, '1').subscribe((book: Books) => {
             console.log('%c GeneseAbstract getOne book ', 'font-weight: bold; color: green;', book);
         });
     }
@@ -95,28 +95,13 @@ export class HomeComponent implements AfterViewInit, OnInit {
      */
     getOneCustom(): void {
         // this.method = this.methodService.getMethod('getOne');
-        this.booksGenese.request(RequestMethod.POST, '/books/get-one-custom', {
+        this.booksGenese.request('/books/get-one-custom', RequestMethod.POST, {
             body: {id: 2}
         }).subscribe((book: Books) => {
             // this.booksGenese.getOneCustom({path: '/books/2'}).subscribe((book: Books) => {
             console.log('%c GeneseAbstract getOneCustom book ', 'font-weight: bold; color: teal;', book);
         });
     }
-
-
-    /**
-     * Get one book with only fields corresponding to LightBookEditor model
-     * This methodName uses the Genese special query with gExtract param
-     * The api route is /books/{id}?gExtract=...
-     * @param id
-     */
-    getOneExtract(id: string): void {
-        this.method = this.methodService.getMethod('getOneExtract');
-        this.booksGenese.getOneExtract<LightBookEditor>(id, LightBookEditor).subscribe((editor: LightBookEditor) => {
-            console.log('%c GeneseAbstract getOneExtract editor ', 'font-weight: bold; color: fuchsia;', editor);
-        });
-    }
-
 
     /**
      * Get one book with all gnTranslate fields translated in a given language
@@ -125,8 +110,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
      */
     getOneTranslated(id: string, language: string): void {
         this.method = this.methodService.getMethod('getOneTranslated');
-        this.booksGenese.getOne(this.path, id).subscribe(book => {
-            const objectTranslated = this.booksGenese.translate(book, language as Language);
+        this.booksGenese.getOne(this.rootPath, id).subscribe(book => {
+            const objectTranslated = this.booksGenese.translate(book, language);
             console.log('%c getOneTranslated objectTranslated ', 'font-weight: bold; color: black;', objectTranslated);
         });
     }
@@ -140,10 +125,11 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.displayedColumns = ['id', 'author', 'title', 'description', 'actions'];
         this.booksGenese
             .getAll('/books')
-            .pipe()
-            .subscribe((data: GetAllResponse<Books>) => {
-                console.log('%c getAll data ', 'font-weight: bold; color: black;', data);
-                this.displayMatTableDataSource(data);
+            .subscribe((response: Books[]) => {
+                console.log('%c getAll response ', 'font-weight: bold; color: black;', response);
+                if (Array.isArray(response)) {
+                    this.displayMatTableDataSource({results: response, totalResults: response.length});
+                }
             });
     }
 
@@ -155,20 +141,18 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.method = this.methodService.getMethod('getAllPrimitives');
         this.categoriesGenese
             .getAll(`/books/${id}/categories`)
-            .pipe()
-            .subscribe((data: GetAllResponse<String>) => {
+            .subscribe((data: string[]) => {
                 console.log('%c getAllPrimitives categories ', 'font-weight: bold; color: brown;', data);
             });
         this.codesGenese
             .getAll(`/books/${id}/codes`)
-            .pipe()
-            .subscribe((data: GetAllResponse<Number>) => {
+            .subscribe((data: number[]) => {
                 console.log('%c getAllPrimitives codes ', 'font-weight: bold; color: brown;', data);
             });
         this.booleansGenese
             .getAll(`/books/${id}/booleans`)
             .pipe()
-            .subscribe((data: GetAllResponse<Boolean>) => {
+            .subscribe((data: boolean[]) => {
                 console.log('%c getAllPrimitives codes ', 'font-weight: bold; color: brown;', data);
             });
     }
@@ -180,20 +164,21 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.method = this.methodService.getMethod('getAllWithPagination');
         this.displayedColumns = ['id', 'author', 'title', 'description', 'actions'];
         this.booksGenese
-            .getAll(
-                this.path,
+            .getAllWithPagination(
+                this.rootPath,
                 {
-                    page: this.paginator.pageIndex,
-                    limit: this.paginator.pageSize
+                    pageIndex: this.paginator.pageIndex,
+                    pageSize: this.paginator.pageSize
                 })
-            .pipe()
-            .subscribe((data: GetAllResponse<Books>) => this.displayMatTableDataSource(data));
+            .subscribe((response: {results: Books[], totalResults: number}) => {
+                console.log('%c getAllWithPagination response ', 'font-weight: bold; color: orange;', response);
+                this.displayMatTableDataSource(response);
+            });
     }
 
 
     delete(id: string): void {
-        this.method = this.methodService.getMethod('delete');
-        this.booksGenese.delete(id).subscribe((response: ResponseStatus) => {
+        this.booksGenese.delete(this.rootPath, id).subscribe((response: ResponseStatus) => {
             console.log('%c GeneseAbstract delete response ', 'font-weight: bold; color: brown;', response);
             this.getAll();
         });
@@ -202,7 +187,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
     create() {
         this.method = this.methodService.getMethod('create');
-        this.booksGenese.create(BOOK).subscribe((newBook: Books) => {
+        this.booksGenese.create(this.rootPath, BOOK).subscribe((newBook: Books) => {
             console.log('%c GeneseAbstract create newBook ', 'font-weight: bold; color: fuchsia;', newBook);
             this.getAll();
         });
@@ -219,7 +204,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
      * Display the books list in a MatTable with pagination
      * @param data
      */
-    displayMatTableDataSource(data) {
+    displayMatTableDataSource(data: GetAllResponse<Books>) {
         this.dataSource = data && Array.isArray(data.results) ? new MatTableDataSource(data.results) : new MatTableDataSource([]);
         this.paginator.length = data && data.totalResults ? data.totalResults : 0;
         this.emptyList = this.paginator.length === 0;
