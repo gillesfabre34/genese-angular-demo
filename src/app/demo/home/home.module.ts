@@ -2,13 +2,20 @@ import { HomeComponent } from './home.component';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from '../../app-routing.module';
 import { CoreModule } from '../core/core.module';
-import { DescriptionComponent } from './description/description.component';
-import { MethodService } from './services/method.service';
+import { GetOneComponent } from './get-one/get-one.component';
+import { GetAllComponent } from './get-all/get-all.component';
+import { DataListComponent } from './data-list/data-list.component';
+import { GetOneCustomComponent } from './get-one-custom/get-one-custom.component';
+import { GetAllCustomComponent } from './get-all-custom/get-all-custom.component';
 
 
 @NgModule({
     declarations: [
-        DescriptionComponent,
+        DataListComponent,
+        GetAllComponent,
+        GetAllCustomComponent,
+        GetOneComponent,
+        GetOneCustomComponent,
         HomeComponent
     ],
     imports: [
@@ -20,7 +27,6 @@ import { MethodService } from './services/method.service';
         HomeComponent,
     ],
     providers: [
-        MethodService
     ],
     exports: [],
 })
