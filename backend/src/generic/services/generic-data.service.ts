@@ -1,5 +1,5 @@
 import { HttpException, Injectable, Query } from '@nestjs/common';
-import { BOOKS } from '../../books/mocks/book.mock';
+import { BOOKS } from '../../app/mocks/book.mock';
 import chalk from 'chalk';
 import { GnRequest } from '../gn-request';
 import { of } from 'rxjs';
@@ -92,7 +92,6 @@ export abstract class GenericDataService<T> {
             return data;
         }
         const parsedModel = JSON.parse(extractionModel);
-        console.log(chalk.cyan('extractFieldsFromData parsedModel'), parsedModel);
         const result = {};
         for (const key of Object.keys(parsedModel)) {
             Object.assign(result, {[key]: this.extractFieldsForOneProperty(data, key, parsedModel[key])});
@@ -134,7 +133,6 @@ export abstract class GenericDataService<T> {
         const branches: string[] = path.split('.');
         let value;
         for (const branch of branches) {
-            console.log(chalk.green.bold('extractValue branch'), branch);
             if (!value) {
                 value = data[branch];
             } else {
