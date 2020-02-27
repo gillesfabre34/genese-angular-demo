@@ -74,20 +74,9 @@ export class Book {
     };
 }
 
-export class LightBookEditor {
-    name ?= 'editor.name';
-    // city ?= 'editor.place.city';
-    country ?= 'editor.place.country';
-    @GnRename('bookTitle')
-    title ?= 'title';
-    // myEditor ?= 'editor';
-    editions ?= 'editions';
-}
-
 export function GnRename(backendProperty: string) {
     // tslint:disable-next-line:only-arrow-functions
     return function(target: any, propertyKey: string) {
-        // console.log('%c GnRename target ', 'font-weight: bold; color: fuchsia;', target);
         if (!target.constructor.gnRename) {
             target.constructor.gnRename = {};
         }
