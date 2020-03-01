@@ -1,6 +1,6 @@
 import { HttpMethod } from './httpMethod';
 
-export interface Endpoint {
+export class Endpoint {
     path: string;
     method: HttpMethod;
     dto?: any;

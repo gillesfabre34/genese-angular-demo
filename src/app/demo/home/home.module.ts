@@ -16,7 +16,8 @@ import { UpdateCustomComponent } from './update-custom/update-custom.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { FormsModule } from '@angular/forms';
 import { GetArrayComponent } from './get-array/get-array.component';
-import { BooksService } from './models/books.service';
+import { BooksService } from './services/books.service';
+import { GeneseRequestService } from './services/genese-request.service';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { BooksService } from './models/books.service';
         HomeComponent,
     ],
     providers: [
-        BooksService
+        BooksService,
+        GeneseRequestService
     ],
     exports: [],
 })
